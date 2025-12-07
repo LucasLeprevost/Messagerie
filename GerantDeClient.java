@@ -2,6 +2,11 @@
 import java.io.*;
 import java.net.*;
 
+
+/**
+ * Gère la communication avec un client spécifique.
+ * Responsable de la réception des messages et de leur diffusion aux autres.
+ */
 public class GerantDeClient implements Runnable 
 {
 	private Socket socket;
@@ -9,6 +14,10 @@ public class GerantDeClient implements Runnable
 	private PrintWriter out;
 	private String nomClient;
 
+
+	/**
+     * Initialise les flux d'entrée et de sortie pour le socket client.
+     */
 	public GerantDeClient(Socket socket) 
 	{
 		this.socket = socket;
@@ -22,7 +31,9 @@ public class GerantDeClient implements Runnable
 		}
 	}
 	
-	
+	/**
+     * Parcourt la liste des clients pour envoyer le message à tous sauf l'émetteur.
+     */
 	public void diffuser(String message) 
 	{
 		for (int i = 0; i < ServeurSimple.lstGerantCli.size(); i++) 
@@ -35,6 +46,10 @@ public class GerantDeClient implements Runnable
 		}
 	}
 
+
+	/**
+     * Demande le pseudo à l'utilisateur jusqu'à obtenir une réponse valide (non vide).
+     */
 	public String demanderNom() 
 	{
 		String nom = "";
@@ -53,6 +68,11 @@ public class GerantDeClient implements Runnable
 		return nom;
 	}
 
+
+	/**
+     * Boucle principale : identifie le client, notifie son arrivée et relaie ses messages.
+     * Gère la déconnexion proprement en cas d'erreur ou de départ.
+     */
 	@Override
 	public void run() 
 	{
@@ -89,6 +109,11 @@ public class GerantDeClient implements Runnable
 		}
 	}
 
+
+	/**
+     * Retire le client de la liste active et ferme le socket.
+     * Informe les autres participants du départ.
+     */
 	private void fermerConnexion() 
 	{
 		try 

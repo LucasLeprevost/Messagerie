@@ -2,8 +2,17 @@ import java.io.*;
 import java.net.*;
 import java.util.Scanner;
 
+
+/**
+ * Application cliente de messagerie.
+ * Gère l'envoi et la réception de messages via deux threads distincts.
+ */
 public class Client 
 {
+	
+	/**
+     * Connecte le client au serveur local et lance les threads d'écoute et d'écriture.
+     */
 	public static void main(String[] args) throws Exception 
 	{
 		Socket socket = new Socket("localhost", 6000);

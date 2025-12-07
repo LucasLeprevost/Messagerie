@@ -2,10 +2,20 @@
 import java.net.*;
 import java.util.ArrayList;
 
+
+/**
+ * Point d'entrée du serveur de messagerie.
+ * Gère l'acceptation des connexions et la liste des clients connectés.
+ */
 public class ServeurSimple 
 {
 	public static ArrayList<GerantDeClient> lstGerantCli = new ArrayList<>();
 
+
+	/**
+     * Initialise le Socket serveur et accepte les connexions en boucle infinie.
+     * Pour chaque client, un nouveau thread GerantDeClient est démarré.
+     */
 	public ServeurSimple(int port) 
 	{
 		try 
