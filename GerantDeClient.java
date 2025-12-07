@@ -21,7 +21,8 @@ public class GerantDeClient implements Runnable
 			System.out.println("Problème lors de l'initialisation du client");
 		}
 	}
-
+	
+	
 	public void diffuser(String message) 
 	{
 		for (int i = 0; i < ServeurSimple.lstGerantCli.size(); i++) 
@@ -68,13 +69,14 @@ public class GerantDeClient implements Runnable
 			System.out.println("Un nouveau client est connecté : " + this.nomClient);
 			this.out.println("Bienvenue " + this.nomClient);
 			
-			this.diffuser("SERVEUR: " + this.nomClient + " a rejoint le chat.");
+			this.diffuser("SERVEUR: " + this.nomClient + " a rejoint le chat.\n" +
+						  "SERVEUR:  Il y a maintenant " + ServeurSimple.lstGerantCli.size() + " clients sur le serveur.");
 
 			String messageRecu;
 
 			while ((messageRecu = this.in.readLine()) != null) 
 			{
-				System.out.println("[" + this.nomClient + "]: " + messageRecu);
+				System.out.println("[" + this.nomClient + "]: " + messageRecu);	
 				String message = this.nomClient + ": " + messageRecu;
 				this.diffuser(message);
 			}
